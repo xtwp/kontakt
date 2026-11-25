@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ООО «Контакт» — отделка и ремонт в Мурманске</title>
+<meta name="description" content="ООО «Контакт», Мурманск. Отделочные, столярные, малярные работы, полы и облицовка. С 2015 года.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { ink:'#07090D', panel:'#0E1218', line:'#1E2630', neon:'#FF5A1F', volt:'#3D7BFF' },
+  fontFamily: { display:['"Space Grotesk"','sans-serif'], body:['Manrope','sans-serif'] }
+}}}
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  body{background:#07090D;color:#E7EBF0;font-family:Manrope,sans-serif}
+  /* чертёжная сетка */
+  .blueprint{background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:48px 48px}
+  .glass{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  /* линейка: фирменный элемент hero */
+  .ruler{height:28px;background:repeating-linear-gradient(90deg,#FF5A1F 0 2px,transparent 2px 12px);-webkit-mask:linear-gradient(#000,#000) top/100% 10px no-repeat,repeating-linear-gradient(90deg,#000 0 2px,transparent 2px 60px) bottom/100% 100% no-repeat;mask:linear-gradient(#000,#000) top/100% 10px no-repeat,repeating-linear-gradient(90deg,#000 0 2px,transparent 2px 60px) bottom/100% 100% no-repeat;transform-origin:left;animation:draw 1.6s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  .card{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+  .card:hover{border-color:#FF5A1F;box-shadow:0 12px 40px -12px #FF5A1F66}
+  .card:hover .ico{background:#FF5A1F;color:#07090D}
+  .ico{transition:background .25s,color .25s}
+  input,textarea{background:#0E1218;border:1px solid #1E2630;border-radius:10px;padding:.8rem 1rem;width:100%;color:#fff;transition:border-color .2s}
+  input:focus,textarea:focus,a:focus-visible,button:focus-visible{outline:2px solid #FF5A1F;outline-offset:2px;border-color:#FF5A1F}
+  @media (prefers-reduced-motion:reduce){.ruler{animation:none}.reveal{opacity:1;transform:none;transition:none}.card{transition:none}html{scroll-behavior:auto}}
+
+  /* 3D */
+  .stage{perspective:1000px}
+  .tilt{transform-style:preserve-3d;transition:transform .15s ease-out,border-color .25s,box-shadow .25s;will-change:transform}
+  .tilt>*{transform:translateZ(24px)}
+  .glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .2s;background:radial-gradient(260px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.14),transparent 60%)}
+  .tilt:hover .glare{opacity:1}
+  .cube-wrap{perspective:900px;width:220px;height:220px}
+  .cube{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:spin 18s linear infinite}
+  .cube i{position:absolute;inset:0;border:2px solid #FF5A1F;background:rgba(255,90,31,.06);box-shadow:0 0 24px #FF5A1F55,inset 0 0 24px #FF5A1F33}
+  .cube i:nth-child(1){transform:translateZ(110px)}
+  .cube i:nth-child(2){transform:rotateY(180deg) translateZ(110px)}
+  .cube i:nth-child(3){transform:rotateY(90deg) translateZ(110px)}
+  .cube i:nth-child(4){transform:rotateY(-90deg) translateZ(110px)}
+  .cube i:nth-child(5){transform:rotateX(90deg) translateZ(110px)}
+  .cube i:nth-child(6){transform:rotateX(-90deg) translateZ(110px)}
+  .core{position:absolute;left:50%;top:50%;width:70px;height:70px;margin:-35px;transform-style:preserve-3d;animation:spin 9s linear infinite reverse}
+  .core i{position:absolute;inset:0;border:2px solid #3D7BFF;box-shadow:0 0 18px #3D7BFF88}
+  .core i:nth-child(1){transform:translateZ(35px)}.core i:nth-child(2){transform:rotateY(180deg) translateZ(35px)}
+  .core i:nth-child(3){transform:rotateY(90deg) translateZ(35px)}.core i:nth-child(4){transform:rotateY(-90deg) translateZ(35px)}
+  .core i:nth-child(5){transform:rotateX(90deg) translateZ(35px)}.core i:nth-child(6){transform:rotateX(-90deg) translateZ(35px)}
+  @keyframes spin{from{transform:rotateX(-20deg) rotateY(0)}to{transform:rotateX(-20deg) rotateY(360deg)}}
+  .heroimg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1601462904263-f2fa0c851cb9?auto=format&fit=crop&w=1600&q=60') center/cover;opacity:.16;will-change:transform}
+  .reveal3d{opacity:0;transform:perspective(900px) rotateX(14deg) translateY(30px);transform-origin:50% 100%;transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+  .reveal3d.in{opacity:1;transform:none}
+  .reveal3d.in.tilt{transition:transform .15s ease-out,border-color .25s,box-shadow .25s}
+  @media (max-width:1023px){.cube-wrap{display:none}}
+  @media (prefers-reduced-motion:reduce){.cube,.core{animation:none}.reveal3d{opacity:1;transform:none;transition:none}.tilt{transition:none}}
+</style>
+</head>
+<body class="antialiased">
+
+<header class="fixed top-0 inset-x-0 z-50 glass">
+  <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+    <a href="#top" class="font-display font-bold text-lg tracking-tight">Контакт<span class="text-neon">.</span></a>
+    <nav class="hidden md:flex gap-8 text-sm text-slate-300">
+      <a href="#about" class="hover:text-neon">О нас</a>
+      <a href="#services" class="hover:text-neon">Услуги</a>
+      <a href="#why" class="hover:text-neon">Почему мы</a>
+      <a href="#contact" class="hover:text-neon">Контакты</a>
+    </nav>
+    <a href="#contact" class="text-sm font-bold bg-neon text-ink rounded-full px-4 py-2 hover:brightness-110">Обсудить проект</a>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section id="hero" class="blueprint relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+  <div class="heroimg" id="heroimg" aria-hidden="true"></div>
+  <div class="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full bg-volt/20 blur-[120px]"></div>
+  <div class="absolute bottom-0 -left-24 w-[420px] h-[420px] rounded-full bg-neon/15 blur-[120px]"></div>
+  <div class="relative max-w-6xl mx-auto px-5 w-full">
+    <p class="text-slate-400 mb-6">Мурманск · работаем с 18 июня 2015 года</p>
+    <h1 class="font-display font-bold text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-tight max-w-4xl">Ремонт нового поколения</h1>
+    <div class="ruler mt-8 max-w-3xl"></div>
+    <p class="mt-8 max-w-xl text-lg text-slate-300">Отделка, дерево, полы, покраска и стекло. Делаем аккуратно, по смете и в срок — уже больше 9 лет на Севере.</p>
+    <div class="stage hidden lg:block absolute right-5 top-1/2 -translate-y-1/2"><div class="cube-wrap" id="cubewrap" aria-hidden="true"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i><div class="core"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="#contact" class="bg-neon text-ink font-bold rounded-full px-7 py-3.5 hover:brightness-110">Обсудить проект</a>
+      <a href="#services" class="glass rounded-full px-7 py-3.5 hover:border-neon">Что мы делаем</a>
+    </div>
+  </div>
+</section>
+
+<!-- О НАС -->
+<section id="about" class="py-24">
+  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
+    <div class="reveal">
+      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight">Строим точно, как чертёж</h2>
+      <p class="mt-6 text-slate-300 leading-relaxed max-w-prose">ООО «Контакт» — строительная компания из Мурманска. Мы отделываем квартиры, офисы и коммерческие помещения: берём современные материалы и инструменты, считаем всё заранее и показываем смету до начала работ.</p>
+      <p class="mt-4 text-slate-300 leading-relaxed max-w-prose">Наша лицензия на деятельность охватывает 15 видов работ — от столярки до остекления, поэтому один подрядчик закрывает весь ремонт.</p>
+    </div>
+    <div class="reveal relative stage"><div class="tilt relative" data-max="6">
+      <img src="https://images.unsplash.com/photo-1744113439895-14529bb2f6e6?auto=format&fit=crop&w=1000&q=70" alt="Электрощит с автоматами" loading="lazy" onerror="this.style.display='none'" class="rounded-2xl border border-line w-full h-80 object-cover bg-panel">
+      <div class="glass absolute -bottom-6 left-6 rounded-xl px-5 py-4"><span class="font-display font-bold text-3xl text-neon">15</span> <span class="text-sm text-slate-300">видов работ в одной команде</span></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- УСЛУГИ -->
+<section id="services" class="py-24 bg-panel/60 border-y border-line">
+  <div class="max-w-6xl mx-auto px-5">
+    <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight reveal">Услуги</h2>
+    <div class="stage mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <article class="card tilt glass rounded-2xl p-6 reveal3d relative"><span class="glare"></span>
+        <div class="ico w-12 h-12 rounded-xl bg-white/5 text-neon grid place-items-center"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div>
+        <h3 class="font-display font-bold text-xl mt-5">Отделка под ключ</h3>
+        <p class="mt-2 text-slate-400 text-sm">Полный цикл: от черновой до чистовой отделки жилых и коммерческих помещений.</p>
+      </article>
+      <article class="card tilt glass rounded-2xl p-6 reveal3d relative"><span class="glare"></span>
+        <div class="ico w-12 h-12 rounded-xl bg-white/5 text-neon grid place-items-center"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 4l6 6-9 9H5v-6zM12 6l6 6"/></svg></div>
+        <h3 class="font-display font-bold text-xl mt-5">Столярные работы</h3>
+        <p class="mt-2 text-slate-400 text-sm">Двери, перегородки, лестницы, мебель и отделка деревом на заказ.</p>
+      </article>
+      <article class="card tilt glass rounded-2xl p-6 reveal3d relative"><span class="glare"></span>
+        <div class="ico w-12 h-12 rounded-xl bg-white/5 text-neon grid place-items-center"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg></div>
+        <h3 class="font-display font-bold text-xl mt-5">Полы и облицовка стен</h3>
+        <p class="mt-2 text-slate-400 text-sm">Плитка, ламинат, паркет, камень: ровная укладка и аккуратные швы.</p>
+      </article>
+      <article class="card tilt glass rounded-2xl p-6 reveal3d relative"><span class="glare"></span>
+        <div class="ico w-12 h-12 rounded-xl bg-white/5 text-neon grid place-items-center"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 3h10v6H5zM15 6h3a2 2 0 012 2v2h-5M10 9v4M8 13h4v8H8z"/></svg></div>
+        <h3 class="font-display font-bold text-xl mt-5">Малярные и стекольные работы</h3>
+        <p class="mt-2 text-slate-400 text-sm">Покраска, декоративные покрытия, остекление и установка зеркал.</p>
+      </article>
+      <article class="card tilt glass rounded-2xl p-6 reveal3d relative"><span class="glare"></span>
+        <div class="ico w-12 h-12 rounded-xl bg-white/5 text-neon grid place-items-center"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <h3 class="font-display font-bold text-xl mt-5">Электромонтажные работы</h3>
+        <p class="mt-2 text-slate-400 text-sm">Проводка, розетки и выключатели, освещение, сборка и подключение электрощитов.</p>
+      </article>
+      <article class="card tilt glass rounded-2xl p-6 reveal3d relative"><span class="glare"></span>
+        <div class="ico w-12 h-12 rounded-xl bg-white/5 text-neon grid place-items-center"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 21h18M6 21V10l6-4v15M12 21V3M12 8h6v13"/></svg></div>
+        <h3 class="font-display font-bold text-xl mt-5">Строительный комплекс</h3>
+        <p class="mt-2 text-slate-400 text-sm">Прочие строительные работы: если задачи нет в списке, напишите нам, и мы оценим её.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ПОЧЕМУ МЫ -->
+<section id="why" class="py-24">
+  <div class="max-w-6xl mx-auto px-5">
+    <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight reveal">Почему «Контакт»</h2>
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="reveal border-t-2 border-neon pt-5"><p class="font-display font-bold text-4xl">9+ лет</p><p class="mt-2 text-slate-400 text-sm">опыта в Мурманске с 2015 года</p></div>
+      <div class="reveal border-t-2 border-line pt-5"><p class="font-display font-bold text-2xl">Технологичный подход</p><p class="mt-2 text-slate-400 text-sm">Современные материалы, лазерные уровни, точные замеры.</p></div>
+      <div class="reveal border-t-2 border-line pt-5"><p class="font-display font-bold text-2xl">Прозрачные сметы</p><p class="mt-2 text-slate-400 text-sm">Цена известна до старта и не растёт по ходу работ.</p></div>
+      <div class="reveal border-t-2 border-line pt-5"><p class="font-display font-bold text-2xl">Работа по договору</p><p class="mt-2 text-slate-400 text-sm">Фиксируем сроки, этапы и гарантии письменно.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ФОРМА -->
+<section id="contact" class="py-24 bg-panel/60 border-t border-line">
+  <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-12">
+    <div class="reveal">
+      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight">Расскажите о задаче</h2>
+      <p class="mt-5 text-slate-300 max-w-md">Опишите, что нужно сделать. Мы свяжемся с вами и предложим решение со сметой.</p>
+    </div>
+    <form id="lead" class="glass rounded-2xl p-6 sm:p-8 space-y-4 reveal" novalidate>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+      <div><label for="name" class="text-sm text-slate-400">Имя</label><input id="name" name="name" required autocomplete="name"></div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div><label for="phone" class="text-sm text-slate-400">Телефон</label><input id="phone" name="phone" type="tel" required autocomplete="tel" placeholder="+7"></div>
+        <div><label for="email" class="text-sm text-slate-400">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+      </div>
+      <div><label for="msg" class="text-sm text-slate-400">Описание задачи</label><textarea id="msg" name="message" rows="4" required></textarea></div>
+      <button id="btn" type="submit" class="w-full bg-neon text-ink font-bold rounded-full py-3.5 hover:brightness-110 disabled:opacity-60">Отправить заявку</button>
+      <p id="status" role="status" class="text-sm min-h-[1.25rem]"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="border-t border-line py-12">
+  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-3 gap-8 text-sm text-slate-400">
+    <div><p class="font-display font-bold text-lg text-white">Контакт<span class="text-neon">.</span></p><p class="mt-2">Отделочные и строительные работы в Мурманске.</p></div>
+    <div><p class="text-white font-bold mb-2">Контакты</p><p>г. Мурманск</p><p><a href="tel:+78152700813" class="hover:text-neon">8 (8152) 70 08 13</a></p><p><a href="mailto:bookbox@bk.ru" class="hover:text-neon">bookbox@bk.ru</a></p></div>
+    <div><p class="text-white font-bold mb-2">Реквизиты</p><p>ООО «Контакт»</p><p>ИНН / ОГРН: укажите</p><p>Основана 18.06.2015</p>
+      <p class="mt-3"><a href="https://t.me/kontaktmmk" target="_blank" rel="noopener" class="hover:text-neon">Telegram</a></p></div>
+  </div>
+  <p class="max-w-6xl mx-auto px-5 mt-10 text-xs text-slate-600">© 2015–<span id="yr"></span> ООО «Контакт»</p>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Появление блоков при скролле
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Отправка формы на почту через Formspree.
+// 1) Зарегистрируйтесь на formspree.io, создайте форму на свою почту.
+// 2) Вставьте полученный адрес вместо YOUR_FORM_ID.
+const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+const form = document.getElementById('lead'), btn = document.getElementById('btn'), st = document.getElementById('status');
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  st.className = 'text-sm';
+  if (!form.checkValidity()) { st.textContent = 'Заполните все поля, проверьте телефон и email.'; st.classList.add('text-red-400'); form.reportValidity(); return; }
+  btn.disabled = true; btn.textContent = 'Отправляем…';
+  try {
+    const r = await fetch(FORMSPREE_URL, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) });
+    if (!r.ok) throw new Error();
+    form.reset(); st.textContent = 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.'; st.classList.add('text-green-400');
+  } catch {
+    st.textContent = 'Не удалось отправить. Попробуйте ещё раз или позвоните нам.'; st.classList.add('text-red-400');
+  } finally { btn.disabled = false; btn.textContent = 'Отправить заявку'; }
+});
+
+// 3D: наклон карточек за курсором
+const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+if (!reduce) {
+  document.querySelectorAll('.tilt').forEach(el => {
+    const max = +el.dataset.max || 10;
+    el.addEventListener('pointermove', e => {
+      if (e.pointerType === 'touch') return;
+      const b = el.getBoundingClientRect(), x = (e.clientX - b.left) / b.width, y = (e.clientY - b.top) / b.height;
+      el.style.transform = `perspective(800px) rotateX(${(.5 - y) * max}deg) rotateY(${(x - .5) * max}deg) scale3d(1.02,1.02,1.02)`;
+      el.style.setProperty('--gx', x * 100 + '%'); el.style.setProperty('--gy', y * 100 + '%');
+    });
+    el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+  });
+  // 3D-параллакс hero: куб и фон следуют за курсором, фон смещается при скролле
+  const hero = document.getElementById('hero'), cw = document.getElementById('cubewrap'), hi = document.getElementById('heroimg');
+  hero.addEventListener('pointermove', e => {
+    const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+    cw.style.transform = `rotateY(${x * 30}deg) rotateX(${-y * 30}deg)`;
+  });
+  addEventListener('scroll', () => { hi.style.transform = `translateY(${scrollY * .25}px) scale(1.1)`; }, { passive: true });
+}
+document.querySelectorAll('.reveal3d').forEach((el, i) => { el.style.transitionDelay = (i % 3) * 90 + 'ms'; io.observe(el); });
+</script>
+</body>
+</html>
